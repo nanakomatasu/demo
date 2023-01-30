@@ -136,8 +136,6 @@
         toastBody.innerHTML = msg;
         myToast.show();
       }
-
-      tip("用户名不合法");
       document
         .querySelector("#btn-login")
         .addEventListener("click", async () => {
@@ -168,6 +166,7 @@
               data,
             });
             tip(res.data.message);
+            localStorage.setItem("token", res.data.data.token);
             setTimeout(() => {
               window.location.assign("./index.html");
             }, 1000);
