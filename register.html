@@ -127,6 +127,16 @@
     <script src="./lib/form-serialize.js"></script>
     <script src="./lib/axios.js"></script>
     <script src="./js/common.js"></script>
-    <script></script>
+    <script>
+      const myToast = new bootstrap.Toast(document.querySelector("#myToast"), {
+        delay: 2000,
+      });
+      function tip(msg) {
+        const toastBody = document.querySelector("#myToast .toast-body");
+        toastBody.innerHTML = msg;
+        myToast.show();
+      }
+      tip("登录成功");
+    </script>
   </body>
 </html>
