@@ -388,14 +388,62 @@
     <script src="./lib/form-serialize.js"></script>
     <script src="./js/common.js"></script>
     <script>
-      let token = localStorage.getItem("token");
-      console.log(token);
-      // document.querySelector("#logout").addEventListener("click", () => {
-      //   localStorage.clear();
-      // });
-      if (!token) {
-        window.location.assign("./index.html");
+      async function getBack() {
+        try {
+          const res = await axios({
+            method: "get",
+            url: "http://ajax-api.itheima.net/dashboard",
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          });
+        } catch (err) {
+          window.location.assign("./login.html");
+        }
       }
+      getBack();
+      document.querySelector("#logout").addEventListener("click", () => {
+        localStorage.clear();
+        getBack();
+      });
+      const username = localStorage.getItem("username");
+      console.log(username);
+      const name1 = document.querySelector(".d-lg-block .font-weight-bold");
+
+      name1 && (name1.innerHTML = username);
+
+      async function rander() {
+        const student = await axios({
+          method: "get",
+          url: "http://ajax-api.itheima.net/students",
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
+        console.log(student.data.data);
+        const data = student.data.data;
+        console.log(data);
+        const arr = data
+          .map((item) => {
+            return `
+          <tr>
+          <td>${item.name}</td>
+          <td>${item.age}</td>
+          <td>${item.gender}</td>
+          <td>第${item.group}组</td>
+          <td>${item.hope_salary}</td>
+          <td>${item.salary}</td>
+          <td>${item.province}</td>
+          <td>
+            <a href=" " class="text-success mr-3" data-id=${item.id}><i class="bi bi-pen"></i></ a>
+            <a href="javascript:;" class="text-danger" data-id=${item.id}><i class="bi bi-trash"></i></a>
+          </td>
+          </tr>`;
+          })
+          .join("");
+        document.querySelector(".list").innerHTML = arr;
+      }
+      rander();
     </script>
   </body>
 </html>
