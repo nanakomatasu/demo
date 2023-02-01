@@ -131,11 +131,6 @@
       const myToast = new bootstrap.Toast(document.querySelector("#myToast"), {
         delay: 2000,
       });
-      function tip(msg) {
-        const toastBody = document.querySelector("#myToast .toast-body");
-        toastBody.innerHTML = msg;
-        myToast.show();
-      }
       document
         .querySelector("#btn-login")
         .addEventListener("click", async () => {
