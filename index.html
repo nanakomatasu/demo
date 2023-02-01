@@ -331,12 +331,10 @@
         try {
           const res = await axios({
             method: "get",
-            url: "http://ajax-api.itheima.net/dashboard",
-            headers: {
-              Authorization: token,
-            },
+            url: "/dashboard",
           });
-          const arr = res.data.data.overview;
+          const arr = res.data.overview;
+          console.log(arr);
           for (const k in arr) {
             document.querySelector(`[name=${k}]`).innerHTML = arr[k];
           }

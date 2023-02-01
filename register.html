@@ -159,14 +159,16 @@
           try {
             const res = await axios({
               method: "post",
-              url: "http://ajax-api.itheima.net/register",
+              url: "/register",
               data,
             });
-            tip(res.data.message);
+            tip("注册成功");
+            console.log(res);
             setTimeout(() => {
               window.location.assign("./login.html");
             }, 1000);
           } catch (err) {
+            // console.log(err.response.data.message);
             tip(err.response.data.message);
           }
         });

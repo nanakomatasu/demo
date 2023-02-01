@@ -392,10 +392,7 @@
         try {
           const res = await axios({
             method: "get",
-            url: "http://ajax-api.itheima.net/dashboard",
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
+            url: "/dashboard",
           });
         } catch (err) {
           window.location.assign("./login.html");
@@ -415,13 +412,10 @@
       async function rander() {
         const student = await axios({
           method: "get",
-          url: "http://ajax-api.itheima.net/students",
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
+          url: "/students",
         });
-        console.log(student.data.data);
-        const data = student.data.data;
+        console.log(student.data);
+        const data = student.data;
         console.log(data);
         const arr = data
           .map((item) => {
