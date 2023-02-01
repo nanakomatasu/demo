@@ -322,25 +322,32 @@
     <script src="./lib/china.js"></script>
     <script src="./js/index.js"></script>
     <script>
-      let token = localStorage.getItem("token");
-      console.log(token);
       // document.querySelector("#logout").addEventListener("click", () => {
       //   localStorage.clear();
       // });
-      if (!token) {
-        window.location.assign("./login.html");
-      }
-      document.querySelector("#logout").addEventListener("click", async () => {
-        localStorage.clear();
+      async function getBack() {
+        let token = localStorage.getItem("token");
+        console.log(token);
         try {
           const res = await axios({
             method: "get",
             url: "http://ajax-api.itheima.net/dashboard",
-            token: "token",
+            headers: {
+              Authorization: token,
+            },
           });
+          const arr = res.data.data.overview;
+          for (const k in arr) {
+            document.querySelector(`[name=${k}]`).innerHTML = arr[k];
+          }
         } catch (err) {
           window.location.assign("./login.html");
         }
+      }
+      getBack();
+      document.querySelector("#logout").addEventListener("click", () => {
+        localStorage.clear();
+        getBack();
       });
       const username = localStorage.getItem("username");
       console.log(username);
