@@ -162,6 +162,7 @@
             });
             tip(res.data.message);
             localStorage.setItem("token", res.data.data.token);
+            localStorage.setItem("username", res.data.data.username);
             setTimeout(() => {
               window.location.assign("./index.html");
             }, 1000);
