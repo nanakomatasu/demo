@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main" style="width: 600px; height: 400px"></div>
+    <script src="./lib/echarts.min.js"></script>
+    <script>
+      var myChart = echarts.init(document.getElementById("main"));
+
+      option = {
+        title: [
+          {
+            text: "男女薪资分布",
+            left: "2%",
+            top: "2%",
+          },
+
+          {
+            subtext: "女生",
+            left: "center",
+            top: "90%",
+            subtextStyle: {
+              fontSize: 16,
+              fontWeight: 700,
+            },
+          },
+          {
+            subtext: "男生",
+            left: "center",
+            top: "40%",
+            subtextStyle: {
+              fontSize: 16,
+              fontWeight: 700,
+            },
+          },
+        ],
+        series: [
+          {
+            type: "pie",
+            radius: ["40%", "50%"],
+            data: [
+              {
+                name: "Apples",
+                value: 70,
+              },
+              {
+                name: "Strawberries",
+                value: 68,
+              },
+              {
+                name: "Bananas",
+                value: 48,
+              },
+              {
+                name: "Oranges",
+                value: 40,
+              },
+            ],
+            label: {
+              position: "outer",
+              alignTo: "none",
+              bleedMargin: 5,
+            },
+
+            top: "50%",
+            bottom: 0,
+          },
+          {
+            type: "pie",
+            radius: ["15%", "19%"],
+
+            data: [
+              {
+                name: "Apples",
+                value: 70,
+              },
+              {
+                name: "Strawberries",
+                value: 68,
+              },
+              {
+                name: "Bananas",
+                value: 48,
+              },
+              {
+                name: "Oranges",
+                value: 40,
+              },
+            ],
+            label: {
+              position: "outer",
+              alignTo: "labelLine",
+              bleedMargin: 5,
+            },
+            top: "-50%",
+            bottom: 0,
+          },
+        ],
+        color: ["#f09a22", "#599cff", "#49d0ff", "#3dd094"],
+      };
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>

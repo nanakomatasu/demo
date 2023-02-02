@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="main" style="width: 600px; height: 400px"></div>
+    <script src="./lib/axios.js"></script>
+    <script src="./lib/echarts.min.js"></script>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById("main"));
+
+      // 指定图表的配置项和数据
+      var option = {
+        tooltip: {
+          trigger: "item",
+        },
+        legend: {
+          top: "85%",
+          left: "center",
+        },
+        title: {
+          text: "班级科薪资走势",
+          top: "10%",
+          left: "20%",
+        },
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: ["40%", "50%"],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 10,
+              borderColor: "#fff",
+              borderWidth: 2,
+            },
+            label: {
+              show: false,
+              position: "center",
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 20,
+                fontWeight: "bold",
+              },
+            },
+            labelLine: {
+              show: false,
+            },
+            data: [
+              { value: 1048, name: "Search Engine" },
+              { value: 735, name: "Direct" },
+              { value: 580, name: "Email" },
+              { value: 484, name: "Union Ads" },
+            ],
+          },
+        ],
+        color: ["#2bd799", "#5097ff", "#fea225", "#40cdff"],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>

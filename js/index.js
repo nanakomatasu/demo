@@ -10,9 +10,19 @@ async function getBack() {
   });
   const arr = res.data.overview;
   const echartsArr = res.data.year;
-  console.log(res.data);
+  // const salaryArr = res.salaryData;
+  // console.log(salaryArr);
   const groupArr = res.data.groupData;
-  console.log(groupArr);
+  const salaryArr = res.data.salaryData;
+  console.log(salaryArr);
+  let sA1 = [];
+  let sA2 = [];
+  let sA3 = [];
+  salaryArr.forEach((item) => {
+    sA1.push({ value: item.g_count + item.b_count, name: item.label });
+    sA2.push({ value: item.g_count, name: item.label });
+    sA3.push({ value: item.b_count, name: item.label });
+  });
   function salaryEcharts(echartsArr) {
     var myChart = echarts.init(document.getElementById("line"));
     var option = {
@@ -183,7 +193,120 @@ async function getBack() {
     });
   }
   salaryGroup(groupArr);
+  function salarySingle(salaryArr) {
+    var myChart = echarts.init(document.getElementById("salary"));
 
+    // 指定图表的配置项和数据
+    var option = {
+      tooltip: {
+        trigger: "item",
+      },
+      legend: {
+        top: "85%",
+        left: "center",
+      },
+      title: {
+        text: "班级科薪资走势",
+        top: "10%",
+        left: "20%",
+      },
+      series: [
+        {
+          type: "pie",
+          radius: ["40%", "50%"],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+          label: {
+            show: false,
+            position: "center",
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 20,
+              fontWeight: "bold",
+            },
+          },
+          labelLine: {
+            show: false,
+          },
+          data: sA1,
+        },
+      ],
+      color: ["#2bd799", "#5097ff", "#fea225", "#40cdff"],
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  }
+  salarySingle(salaryArr);
+  function salaryDouble(salaryArr) {
+    var myChart = echarts.init(document.getElementById("gender"));
+
+    option = {
+      title: [
+        {
+          text: "男女薪资分布",
+          left: "2%",
+          top: "2%",
+        },
+
+        {
+          subtext: "女生",
+          left: "center",
+          top: "90%",
+          subtextStyle: {
+            fontSize: 16,
+            fontWeight: 700,
+          },
+        },
+        {
+          subtext: "男生",
+          left: "center",
+          top: "40%",
+          subtextStyle: {
+            fontSize: 16,
+            fontWeight: 700,
+          },
+        },
+      ],
+      series: [
+        {
+          type: "pie",
+          radius: ["40%", "50%"],
+          data: sA2,
+          label: {
+            position: "outer",
+            alignTo: "none",
+            bleedMargin: 5,
+          },
+
+          top: "50%",
+          bottom: 0,
+        },
+        {
+          type: "pie",
+          radius: ["40%", "50%"],
+
+          data: sA3,
+          label: {
+            position: "outer",
+            alignTo: "labelLine",
+            bleedMargin: 5,
+          },
+          top: "-50%",
+          bottom: 0,
+        },
+      ],
+      color: ["#f09a22", "#599cff", "#49d0ff", "#3dd094"],
+    };
+    myChart.setOption(option);
+  }
+  salaryDouble(salaryArr);
   for (const k in arr) {
     document.querySelector(`[name=${k}]`).innerHTML = arr[k];
   }
