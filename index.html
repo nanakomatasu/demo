@@ -321,36 +321,5 @@
     <script src="./js/common.js"></script>
     <script src="./lib/china.js"></script>
     <script src="./js/index.js"></script>
-    <script>
-      // document.querySelector("#logout").addEventListener("click", () => {
-      //   localStorage.clear();
-      // });
-      async function getBack() {
-        let token = localStorage.getItem("token");
-        console.log(token);
-        try {
-          const res = await axios({
-            method: "get",
-            url: "/dashboard",
-          });
-          const arr = res.data.overview;
-          for (const k in arr) {
-            document.querySelector(`[name=${k}]`).innerHTML = arr[k];
-          }
-        } catch (err) {
-          window.location.assign("./login.html");
-        }
-      }
-      getBack();
-      document.querySelector("#logout").addEventListener("click", () => {
-        localStorage.clear();
-        getBack();
-      });
-      const username = localStorage.getItem("username");
-      console.log(username);
-      const name1 = document.querySelector(".d-lg-block .font-weight-bold");
-
-      name1 && (name1.innerHTML = username);
-    </script>
   </body>
 </html>
