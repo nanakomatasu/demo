@@ -156,21 +156,16 @@
             tip("密码不合法");
           }
 
-          try {
-            const res = await axios({
-              method: "post",
-              url: "/register",
-              data,
-            });
-            tip("注册成功");
-            console.log(res);
-            setTimeout(() => {
-              window.location.assign("./login.html");
-            }, 1000);
-          } catch (err) {
-            // console.log(err.response.data.message);
-            tip(err.response.data.message);
-          }
+          const res = await axios({
+            method: "post",
+            url: "/register",
+            data,
+          });
+          tip("注册成功");
+          console.log(res);
+          setTimeout(() => {
+            window.location.assign("./login.html");
+          }, 1000);
         });
     </script>
   </body>

@@ -137,7 +137,7 @@
           const data = serialize(document.querySelector("form"), {
             hash: true,
           });
-          console.log(data);
+          // console.log(data);
           if (
             data.username === undefined ||
             data.username.length < 2 ||
@@ -154,19 +154,17 @@
             tip("密码不合法");
           }
 
-          try {
-            const res = await axios({
-              method: "post",
-              url: "/login",
-              data,
-            });
-            tip("登录成功");
-            setTimeout(() => {
-              window.location.assign("./index.html");
-            }, 1000);
-          } catch (err) {
-            tip(err.response.data.message);
-          }
+          const res = await axios({
+            method: "post",
+            url: "/login",
+            data,
+          });
+          console.log(res.data.token);
+          localStorage.setItem("token", res.data.token);
+          tip("登录成功");
+          setTimeout(() => {
+            window.location.assign("./index.html");
+          }, 1000);
         });
     </script>
   </body>

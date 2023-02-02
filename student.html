@@ -389,14 +389,10 @@
     <script src="./js/common.js"></script>
     <script>
       async function getBack() {
-        try {
-          const res = await axios({
-            method: "get",
-            url: "/dashboard",
-          });
-        } catch (err) {
-          window.location.assign("./login.html");
-        }
+        const res = await axios({
+          method: "get",
+          url: "/dashboard",
+        });
       }
       getBack();
       document.querySelector("#logout").addEventListener("click", () => {
